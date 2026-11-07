@@ -1,0 +1,14 @@
+.env
+bin/
+obj/
+*.user
+.vs/
+.idea/
+.gradle/
+build/
+local.properties
+*.apk
+__pycache__/
+node_modules/
+TestResults/
+Sobe_GS-*.zip
