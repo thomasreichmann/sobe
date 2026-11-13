@@ -1,0 +1,51 @@
+name: sobe
+
+services:
+  banco:
+    image: gvenzl/oracle-free:23-slim-faststart
+    environment:
+      ORACLE_PASSWORD: ${SOBE_ORACLE_SYS_PASSWORD:-Sobe_sys_2026}
+      APP_USER: sobe
+      APP_USER_PASSWORD: ${SOBE_DB_PASSWORD:-Sobe_app_2026}
+    ports:
+      - "${SOBE_DB_PORT:-1521}:1521"
+    volumes:
+      - ./banco:/banco:ro
+      - ./scripts/banco-inicial.sh:/container-entrypoint-initdb.d/01-sobe.sh:ro
+      - dados-banco:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD-SHELL", "printf 'WHENEVER SQLERROR EXIT FAILURE\\nSELECT 1 FROM TB_USUARIO WHERE ROWNUM = 1;\\n' | sqlplus -s -l sobe/$$APP_USER_PASSWORD@//localhost:1521/FREEPDB1 > /dev/null"]
+      interval: 10s
+      timeout: 10s
+      retries: 40
+      start_period: 20s
+
+  api:
+    build: ./api
+    depends_on:
+      banco:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__Oracle: User Id=sobe;Password=${SOBE_DB_PASSWORD:-Sobe_app_2026};Data Source=banco:1521/FREEPDB1
+      Jwt__Chave: ${SOBE_JWT_CHAVE:-chave-de-demonstracao-do-sobe-troque-em-producao}
+      Dispositivos__Chave: ${SOBE_CHAVE_DISPOSITIVO:-sensores-do-sobe-demo}
+    ports:
+      - "${SOBE_API_PORT:-5080}:5080"
+
+  simulador:
+    image: python:3.13-alpine
+    profiles: ["simulador"]
+    depends_on:
+      - api
+    environment:
+      SOBE_API: http://api:5080
+      SOBE_CHAVE_DISPOSITIVO: ${SOBE_CHAVE_DISPOSITIVO:-sensores-do-sobe-demo}
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./iot:/iot:ro
+    stdin_open: true
+    tty: true
+    command: ["python", "/iot/simulador.py"]
+
+volumes:
+  dados-banco:
