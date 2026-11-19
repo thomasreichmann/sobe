@@ -11,7 +11,7 @@ indica a estação acessível mais próxima na mesma linha.
 **Integrante:** Thomas de Almeida Reichmann, RM 554812, turma 3ESOA. Entrega individual: sou aluno
 transferido do curso presencial e a plataforma me colocou sozinho no Grupo 20.
 
-**Vídeo pitch:** <LINK-DO-PITCH>
+**Vídeo pitch:** https://www.youtube.com/watch?v=l0ZJ410NtzA
 
 O PDF com os entregáveis de cada parte é o `Sobe-entregaveis.pdf`, na raiz. Ele se conecta aos ODS 10 (redução das
 desigualdades) e 11 (cidades e comunidades sustentáveis, meta 11.2: transporte acessível para todos).
