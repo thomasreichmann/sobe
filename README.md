@@ -12,7 +12,7 @@ indica a estação acessível mais próxima na mesma linha.
 
 **Vídeo pitch:** <LINK-DO-PITCH>
 
-O PDF com os entregáveis de cada parte está em `entrega/`. Ele se conecta aos ODS 10 (redução das
+O PDF com os entregáveis de cada parte é o `Sobe-entregaveis.pdf`, na raiz. Ele se conecta aos ODS 10 (redução das
 desigualdades) e 11 (cidades e comunidades sustentáveis, meta 11.2: transporte acessível para todos).
 
 ## O que há aqui
@@ -23,9 +23,6 @@ desigualdades) e 11 (cidades e comunidades sustentáveis, meta 11.2: transporte 
 | `api/` | API RESTful e testes | ASP.NET Core 8 em C#, com Entity Framework Core; testes automatizados; `swagger.json` |
 | `mobile/` | Frontend mobile | App Android em Kotlin e Jetpack Compose, que consome a API com Retrofit e guarda a última situação com Room |
 | `iot/` | Simulação de IoT | `simulador.py`, que faz o papel dos sensores e envia as leituras para a API |
-| `evidencias/` | Plano de testes | Saídas do banco, dos testes, da API e do simulador, e as telas do app |
-| `entrega/` | PDF | O relatório e o que o gera |
-| `scripts/` | | Geração das evidências e do pacote da entrega |
 
 ## Como rodar
 
@@ -154,15 +151,6 @@ fora de serviço, a estação deixa de contar como acessível e a API passa a in
 - **Segredos fora do código:** chave do JWT, chave dos sensores e senha do banco vêm de variáveis de
   ambiente (`.env.exemplo`). Os valores do `compose.yaml` servem só para rodar na própria máquina.
 - **App:** o tráfego sem TLS só é permitido na versão de depuração; a de produção exige HTTPS.
-
-## Evidências e PDF
-
-```sh
-bash scripts/evidencias.sh        # recria o ambiente e grava as saídas em evidencias/
-bash scripts/capturas-app.sh      # telas do app, com um emulador ligado
-cd entrega && npm install && node pdf.mjs
-bash scripts/empacotar.sh         # monta o .zip da entrega
-```
 
 A fonte do app e do relatório é a Atkinson Hyperlegible, do Braille Institute, sob a licença SIL Open
 Font (`mobile/app/LICENCA-DA-FONTE.txt`).
