@@ -8,7 +8,8 @@ se os elevadores, as escadas rolantes e as plataformas de cada estação estão 
 instalados nos equipamentos detectam a parada, o aplicativo avisa quem acompanha aquela estação e
 indica a estação acessível mais próxima na mesma linha.
 
-**Integrante:** Thomas de Almeida Reichmann, RM 554812, turma 3ESOA.
+**Integrante:** Thomas de Almeida Reichmann, RM 554812, turma 3ESOA. Entrega individual: sou aluno
+transferido do curso presencial e a plataforma me colocou sozinho no Grupo 20.
 
 **Vídeo pitch:** <LINK-DO-PITCH>
 
@@ -73,6 +74,9 @@ linha de comando, com um emulador ligado:
 ```sh
 cd mobile && ./gradlew installDebug
 ```
+
+O pacote da entrega traz um `Sobe.apk` de depuração já compilado, para instalar sem abrir o projeto:
+`adb install Sobe.apk`.
 
 No emulador o app já aponta para `http://10.0.2.2:5080/`, que é o `localhost` do computador. Num celular
 de verdade, toque na engrenagem da tela de entrada e informe o endereço do computador na rede.
